@@ -14,7 +14,7 @@ function getRandomNumber() {
 
 function getRandomSymbol() {
   const symbols = '!@#$%^&*(){}[]=<>/,.'
-  return symbols[Math.floor(Math.random() )] * symbols.length;
+  return symbols[Math.floor(Math.random()*symbols.length )]
 }
 
 // Get references to the #generate element
@@ -35,27 +35,36 @@ function writePassword() {
   passwordText.value = password;
 
 }
-
+function generatePassword() {
+  const options= []
+  const passLength= parseInt(prompt('Choose between (8-128) for the length of your password'));
+  const hasUpper= confirm ("Upper Case Characters")
+  const hasLower= confirm ("Lower Case Characters")
+  const hasNumber= confirm ("Number Characters")
+  const hasSymbols= confirm ("Symbols Characters")
+  if (hasUpper === true) {
+    options.push(getRandomUpper)
+  }
+  if (hasLower === true) {
+    options.push(getRandomLower)
+  }
+  if (hasNumber === true) {
+    options.push(getRandomNumber)
+  }
+  if (hasSymbols === true) {
+  options.push(getRandomSymbol)
+  }
+  let password=""
+  console.log (options)
+  for (i = 0; i <passLength; i++) {
+    let randomindex= Math.floor(Math.random()*options.length)
+    console.log (randomindex)
+    let randomChar= options[randomindex]()
+    password += randomChar
+}
+return password
+}
 
 // Add event listener to generate button 
 generateBtn.addEventListener("click", writePassword);
-const passLength = parseInt(prompt('Choose between (8-128) for the length of your password'));
-
-for (i = 0; i <passLength; i++) {
-  let randomNumber = Math.floor(Math.random() * CharacterData.length);
-}
-
-  const length = +lengthEl.value;
-  const hasLower= lowercaseEl.checked;
-  const hasUpper= uppercaseEl.checked;
-  const hasNumber= numbercaseEl.checked;
-  const hasSymbols= symbolcaseEl.checked;
-
-  resultEl.innerText = generatePassword(
-    hasLower,
-    hasUpper, 
-    hasNumber, 
-    hasSymbol, 
-    length
-  );
 
